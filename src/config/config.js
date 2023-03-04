@@ -45,7 +45,7 @@ function GetBrowser() {
 
 var path;
 if (window.location.origin.includes("localhost")) {
-  path = "http://localhost/svapo/public";
+  path = "http://localhost/svapo_1/public";
 } else {
   path = window.location.origin;
 }
