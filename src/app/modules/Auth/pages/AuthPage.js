@@ -32,7 +32,7 @@ export function AuthPage() {
                 <img
                   alt="Logo"
                   className="max-h-200px"
-                  src={toAbsoluteUrl("/media/logos/fantacarnevale23.png")}
+                  src={toAbsoluteUrl("/media/logos/svapo.jpg")}
                 />
               </Link>
               {/* end:: Aside header */}
@@ -42,7 +42,7 @@ export function AuthPage() {
                 <img
                   alt="Logo"
                   className="max-h-200px"
-                  src={toAbsoluteUrl("/media/logos/sito.png")}
+                  //src={toAbsoluteUrl("/media/logos/sito.png")}
                 />
               </div>
               {/* end:: Aside content */}
