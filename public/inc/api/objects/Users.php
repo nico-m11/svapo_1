@@ -1706,6 +1706,7 @@ class Users
 
                 $result = [
                     "id"              => $user['id_user'],
+                    'name'            => $user['name'],
                     "email"           => $user['email'],
                     "authToken"       => $user['accessToken'],
                 ];
