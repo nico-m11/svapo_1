@@ -38,7 +38,7 @@ export function AsideMenuList({ layoutProps }) {
 
         {/* eCommerce */}
         {/*begin::1 Level*/}
-        <li
+        {/* <li
           className={`menu-item menu-item-submenu ${getMenuItemActive(
             "/e-commerce",
             true
@@ -54,14 +54,14 @@ export function AsideMenuList({ layoutProps }) {
           </NavLink>
           <div className="menu-submenu">
             <i className="menu-arrow" />
-            <ul className="menu-subnav">
-              <li className="menu-item menu-item-parent" aria-haspopup="true">
+            <ul className="menu-subnav"> */}
+        {/* <li className="menu-item menu-item-parent" aria-haspopup="true">
                 <span className="menu-link">
                   <span className="menu-text">Classifica Generale</span>
                 </span>
-              </li>
-              {/*begin::2 Level*/}
-              <li
+              </li> */}
+        {/*begin::2 Level*/}
+        {/* <li
                 className={`menu-item ${getMenuItemActive(
                   "/e-commerce/customers"
                 )}`}
@@ -73,10 +73,10 @@ export function AsideMenuList({ layoutProps }) {
                   </i>
                   <span className="menu-text">Crea la tua lega privata</span>
                 </NavLink>
-              </li>
-              {/*end::2 Level*/}
-              {/*begin::2 Level*/}
-              <li
+              </li> */}
+        {/*end::2 Level*/}
+        {/*begin::2 Level*/}
+        {/* <li
                 className={`menu-item ${getMenuItemActive(
                   "/e-commerce/products"
                 )}`}
@@ -101,47 +101,105 @@ export function AsideMenuList({ layoutProps }) {
                   </i>
                   <span className="menu-text">Classifica</span>
                 </NavLink>
-              </li>
-              {/*end::2 Level*/}
-            </ul>
+              </li> */}
+        {/*end::2 Level*/}
+        {/* </ul>
           </div>
-        </li>
+        </li> */}
         {/*end::1 Level*/}
 
         {/* Custom */}
         {/* begin::section */}
-        {user.private === "0" ? (
-          <></>
-        ) : (
-          <>
-            <li className="menu-section ">
-              <h4 className="menu-text">Classifica Privata</h4>
-              <i className="menu-icon flaticon-more-v2"></i>
-            </li>
-            {/* end:: section */}
 
-            {/* Custom Page */}
-            {/*begin::1 Level*/}
-            <li
-              className={`menu-item menu-item-submenu ${getMenuItemActive(
-                "/my-page",
-                true
-              )}`}
-              aria-haspopup="true"
-              data-menu-toggle="hover"
-            >
-              <NavLink className="menu-link menu-toggle" to="/my-page">
-                <span className="svg-icon menu-icon">
-                  <SVG
-                    src={toAbsoluteUrl("/media/svg/icons/General/Star.svg")}
-                  />
-                </span>
-                <span className="menu-text">Lega Privata</span>
-              </NavLink>
-            </li>
-            {/*end::1 Level*/}
-          </>
-        )}
+        <li className="menu-section ">
+          <h4 className="menu-text">Amministrazione</h4>
+          <i className="menu-icon flaticon-more-v2"></i>
+        </li>
+        {/* end:: section */}
+
+        {/* Custom Page */}
+        {/*begin::1 Level*/}
+        <li
+          className={`menu-item menu-item-submenu ${getMenuItemActive(
+            "/my-page",
+            true
+          )}`}
+          aria-haspopup="true"
+          data-menu-toggle="hover"
+        >
+          <NavLink className="menu-link menu-toggle" to="/my-page">
+            <span className="svg-icon menu-icon">
+              <SVG src={toAbsoluteUrl("/media/svg/icons/General/Star.svg")} />
+            </span>
+            <span className="menu-text">Prodotti</span>
+          </NavLink>
+        </li>
+        {/*end::1 Level*/}
+        <li
+          className={`menu-item menu-item-submenu ${getMenuItemActive(
+            "/my-page",
+            true
+          )}`}
+          aria-haspopup="true"
+          data-menu-toggle="hover"
+        >
+          <NavLink className="menu-link menu-toggle" to="/my-page">
+            <span className="svg-icon menu-icon">
+              <SVG src={toAbsoluteUrl("/media/svg/icons/General/Star.svg")} />
+            </span>
+            <span className="menu-text">Ordini</span>
+          </NavLink>
+        </li>
+        <li
+          className={`menu-item menu-item-submenu ${getMenuItemActive(
+            "/my-page",
+            true
+          )}`}
+          aria-haspopup="true"
+          data-menu-toggle="hover"
+        >
+          <NavLink className="menu-link menu-toggle" to="/my-page">
+            <span className="svg-icon menu-icon">
+              <SVG src={toAbsoluteUrl("/media/svg/icons/General/Star.svg")} />
+            </span>
+            <span className="menu-text">Genera Ordinamento Ordini</span>
+          </NavLink>
+        </li>
+        <li
+          className={`menu-item menu-item-submenu ${getMenuItemActive(
+            "/my-page",
+            true
+          )}`}
+          aria-haspopup="true"
+          data-menu-toggle="hover"
+        >
+          <NavLink className="menu-link menu-toggle" to="/my-page">
+            <span className="svg-icon menu-icon">
+              <SVG src={toAbsoluteUrl("/media/svg/icons/General/Star.svg")} />
+            </span>
+            <span className="menu-text">Aggiungi utente</span>
+          </NavLink>
+        </li>
+        <li className="menu-section ">
+          <h4 className="menu-text">Magazzino</h4>
+          <i className="menu-icon flaticon-more-v2"></i>
+        </li>
+
+        <li
+          className={`menu-item menu-item-submenu ${getMenuItemActive(
+            "/my-page",
+            true
+          )}`}
+          aria-haspopup="true"
+          data-menu-toggle="hover"
+        >
+          <NavLink className="menu-link menu-toggle" to="/my-page">
+            <span className="svg-icon menu-icon">
+              <SVG src={toAbsoluteUrl("/media/svg/icons/General/Star.svg")} />
+            </span>
+            <span className="menu-text">Label GLS</span>
+          </NavLink>
+        </li>
       </ul>
 
       {/* end::Menu Nav */}
