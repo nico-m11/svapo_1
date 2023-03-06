@@ -39,7 +39,7 @@ export function UserProfileDropdown() {
           </span>
           <span className="symbol symbol-35 symbol-light-success">
             <span className="symbol-label font-size-h5 font-weight-bold">
-              {user.name[0]}
+              {/* {user.name[0]} */}
             </span>
           </span>
         </div>
@@ -75,7 +75,7 @@ export function UserProfileDropdown() {
             >
               <div className="symbol bg-white-o-15 mr-3">
                 <span className="symbol-label text-success font-weight-bold font-size-h4">
-                  {user.name[0]}
+                  {/* {user.name[0]} */}
                 </span>
                 {/*<img alt="Pic" className="hidden" src={user.pic} />*/}
               </div>
