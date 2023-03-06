@@ -8,79 +8,36 @@ import { useSelector, shallowEqual, connect, useDispatch } from "react-redux";
 
 export function MyPage() {
   const user = useSelector((state) => state.auth.user);
-  const [classifica, setClassifica] = useState([]);
-
-  const classificaFetch = async () => {
-    const res = await fetch(
-      `http://localhost/FantaCarnevale/api/getPrivateClassific?user=` +
-        user.id_user
-    );
-    const data = await res.json();
-
-    setClassifica(data);
-  };
-
-  useEffect(() => {
-    classificaFetch();
-  }, []);
 
   return (
     <>
-      <Table striped>
+      <Table striped bordered hover size="sm">
         <thead>
           <tr>
-            <th>Nome Quadriglia</th>
-            <th>Nome Utente</th>
+            <th>#</th>
+            <th>Prodotti</th>
+            <th>Last Name</th>
+            <th>Username</th>
           </tr>
         </thead>
-
         <tbody>
-          <>
-            <tr>
-              {classifica.map((e) => (
-                <td>{e.first_team.nome_quadriglia}</td>
-              ))}
-              {classifica.map((e) => (
-                <td>{e.first_team.nome_user}</td>
-              ))}
-            </tr>
-            <tr>
-              {/**second */}
-              {classifica.map((e) => (
-                <td>{e.second_team.nome_quadriglia}</td>
-              ))}
-              {classifica.map((e) => (
-                <td>{e.second_team.nome_user}</td>
-              ))}
-            </tr>
-            <tr>
-              {/**terz */}
-              {classifica.map((e) => (
-                <td>{e.terz_team.nome_quadriglia}</td>
-              ))}
-              {classifica.map((e) => (
-                <td>{e.terz_team.nome_user}</td>
-              ))}
-            </tr>
-            <tr>
-              {/** quart */}
-              {classifica.map((e) => (
-                <td>{e.quart_team.nome_quadriglia}</td>
-              ))}
-              {classifica.map((e) => (
-                <td>{e.quart_team.nome_user}</td>
-              ))}
-            </tr>
-            <tr>
-              {/**quint */}
-              {classifica.map((e) => (
-                <td>{e.quint_team.nome_quadriglia}</td>
-              ))}
-              {classifica.map((e) => (
-                <td>{e.quint_team.nome_user}</td>
-              ))}
-            </tr>
-          </>
+          <tr>
+            <td>1</td>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td colSpan={2}>Larry the Bird</td>
+            <td>@twitter</td>
+          </tr>
         </tbody>
       </Table>
     </>
