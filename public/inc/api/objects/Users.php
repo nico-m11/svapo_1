@@ -236,8 +236,8 @@ class Users
 
         // fields
         $email = addslashes($output["email"]);
-        //$password = hash("sha256", $output["password"]);
-        $password = $output["password"];
+        $password = hash("sha256", $output["password"]);
+        // $password = $output["password"];
 
         $sql_control = "SELECT * FROM users WHERE email = '$email' AND password = '$password' AND active = 0 AND deleted = 0";
 
