@@ -237,7 +237,6 @@ class Users
         // fields
         $email = addslashes($output["email"]);
         $password = hash("sha256", $output["password"]);
-        // $password = $output["password"];
 
         $sql_control = "SELECT * FROM users WHERE email = '$email' AND password = '$password' AND active = 0 AND deleted = 0";
 
@@ -410,9 +409,9 @@ class Users
         $stmt->execute();
         if ($stmt->rowCount() > 0) {
             $stmt->fetch(PDO::FETCH_ASSOC);
-            return 'Create User';
+            return true . '  Create User';
         } else {
-            return 'No User Create';
+            return false . '  No User Create';
         }
     }
 
