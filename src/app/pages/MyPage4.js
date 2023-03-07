@@ -4,30 +4,22 @@
 // STORYBOOK: https://react-bootstrap-table.github.io/react-bootstrap-table2/storybook/index.html
 import React, { useEffect, useMemo, useState } from "react";
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
-import { connect } from "react-redux";
-import { FormattedMessage, injectIntl } from "react-intl";
-import Modal from "react-bootstrap/Modal";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-import Col from "react-bootstrap/Col";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import config from "../../config/config";
 
 const initialValues = {
   email: "",
   username: "",
   password: "",
   name: "",
-  role: "",
+  role: 0,
 };
 
 export function MyPage4(props) {
+  const user = useSelector((state) => state.auth.user);
   const { intl } = props;
   const [loading, setLoading] = useState(false);
-  const user = useSelector((state) => state.auth.user);
-  const [show, setShow] = useState(false);
 
   const RegistrationSchema = Yup.object().shape({
     username: Yup.string()
@@ -64,21 +56,23 @@ export function MyPage4(props) {
   const formik = useFormik({
     initialValues,
     validationSchema: RegistrationSchema,
-    onSubmit: (values, { setStatus, setSubmitting }) => {
-      //const formdata = new FormData();
+    onSubmit: (values, { setStatus, setSubmitting}) => {
       const requestOptions = {
+        headers: {
+          Authorization:
+            "271c4d716fcf0e9555b51cffed666b4321f98f7f8bbeb9ae8bfc67752b4db8a2",
+        },
         method: "POST",
-        redirect: "follow",
-        body: {
-          name: values.name,
+        body: JSON.stringify({
           email: values.email,
           password: values.password,
-          role: values.role,
+          name: values.name,
           username: values.username,
-        },
+          role: values.role
+        }),
       };
 
-      fetch("", requestOptions)
+      fetch(config.apiUrl + "users/CreateUser.php", requestOptions)
         .then((response) => response.json())
         .then((result) => {
           console.log(result);
@@ -90,11 +84,6 @@ export function MyPage4(props) {
         })
         .catch(() => {
           setSubmitting(false);
-          setStatus(
-            intl.formatMessage({
-              id: "AUTH.VALIDATION.INVALID_LOGIN",
-            })
-          );
         });
     },
   });
@@ -110,9 +99,6 @@ export function MyPage4(props) {
           className="form fv-plugins-bootstrap fv-plugins-framework animated animate__animated animate__backInUp"
           onSubmit={formik.handleSubmit}
         >
-          {/* begin: Alert */}
-
-          {/* end: Alert */}
           {/* begin: Fullname */}
           <div className="form-group fv-plugins-icon-container">
             <select
@@ -122,8 +108,8 @@ export function MyPage4(props) {
               aria-label=".form-select-sm example"
             >
               <option selected>Seleziona Ruolo</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
+              <option value='one'>One</option>
+              <option value='two'>Two</option>
             </select>
             {formik.touched.role && formik.errors.role ? (
               <div className="fv-plugins-message-container">

@@ -390,228 +390,29 @@ class Users
             return -1;
         }
     }
-    // END LOST PASSWORD SISTEM
 
 
-    // Create User withRegistration
-    public function ActivateAccount($output)
-    {
-        $id_user = $output["person"];
-        $code = $output["code"];
-
-        $sql_control = "SELECT email FROM users WHERE id_user = $id_user AND deleted = 0";
-        //preparo l'istruzione
-        $stmt_control = $this->conn->prepare($sql_control);
-        //execute query
-        $stmt_control->execute();
-
-        if ($stmt_control->rowCount() > 0) {
-            $user = $stmt_control->fetch(PDO::FETCH_ASSOC);
-            //$email = md5($user["email"]);
-            $email = hash("sha256", $user["email"]);
-
-            if ($email == $code) {
-
-                $sql = "UPDATE users SET 
-                active = 1
-                WHERE id_user = '$id_user'";
-
-                //preparo l'istruzione
-                $stmt = $this->conn->prepare($sql);
-                //execute query
-                $stmt->execute();
-
-                $sql_control2 = "SELECT * FROM users WHERE id_user = $id_user AND active = 1 AND deleted = 0";
-                //preparo l'istruzione
-                $stmt_control2 = $this->conn->prepare($sql_control2);
-                //execute query
-                $stmt_control2->execute();
-
-                return $stmt_control2->rowCount();
-            }
-        }
-    }
 
     // Create User 
     public function CreateUser($output)
     {
-        $id_user = $output["id_user"];
-        $firstName = addslashes($output["firstName"]);
-        $lastName = addslashes($output["lastName"]);
-        $companyName = $output["companyName"] ? addslashes($output["companyName"]) : 'NULL';
-        $birthday = $output["birthday"] != '' ? "'" . $output["birthday"] . "'" : 'NULL';
-        $email = $output["email"];
-        $password = addslashes($output["password"]);
-        $role = $output["role"];
-        $role_customer = $output["role_customer"];
-        $id_manager = $output["id_manager"];
-        $is_created_backend = $output["is_created_backend"];
-        $commissions_producer_collections = $output["commissions_producer_collections"];
-        $commissions_producer_single_lots = $output["commissions_producer_single_lots"];
-        $id_customer_stripe = isset($output["id_customer_stripe"]) && $output["id_customer_stripe"] != '' ? $output["id_customer_stripe"] : 0;
-        $active = $output["active"];
+        $email = isset($output['email']) ? $output['email'] : '';
+        $password = isset($output['password']) ? hash("sha256", $output['password']) : '';
+        $name = isset($output['name']) ? $output['name'] : '';
+        $username = isset($output['username']) ? $output['username'] : '';
+        $role = isset($output['role']) ? $output['role'] : 0;
+        $accesToken = "access-token-" . $this->generateRandomString(32);
 
-        //$stripe_call = new StripeSistem($this->conn);
+        $sql = "INSERT INTO `users`( `name`, `username`, `email`, `accessToken`, `password`, `active`, `deleted`) VALUES ('$name','$username','$email','$accesToken','$password', 1, 0)";
+        $stmt = $this->conn->prepare($sql);
 
-        $sql_control = "SELECT email FROM users WHERE email = '$email' AND deleted = 0";
-        //preparo l'istruzione
-        $stmt_control = $this->conn->prepare($sql_control);
         //execute query
-        $stmt_control->execute();
-
-        if ($stmt_control->rowCount() == 0) {
-
-            $sql2 = "SELECT email FROM users WHERE email = '$email' AND deleted = 0";
-            //preparo l'istruzione
-            $stmt2 = $this->conn->prepare($sql2);
-            //execute query
-            $stmt2->execute();
-            $user = $stmt_control->fetch(PDO::FETCH_ASSOC);
-            $email_actual = $user["email"];
-
-            // $password = md5($password);
-            $password = hash("sha256", $password);
-
-            // if the user not are customer set the role_customer 0
-            if ($role != 2) {
-                $role_customer = 0;
-            }
-
-            if ($role == 3) {
-                $id_producer = $this->nextIdProducer();
-            } else {
-                $id_producer = 0;
-            }
-
-            // 32
-            $accesToken = "access-token-" . $this->generateRandomString(32);
-            $refreshToken = "access-token-" . $this->generateRandomString(32);
-            $sql = "INSERT INTO users (id_manager,id_customer_stripe,id_producer,firstName,lastName,companyName,birthday,email,password,roles,accessToken,refreshToken,is_created_backend,active) VALUES ('$id_manager','$id_customer_stripe','$id_producer','$firstName','$lastName','$companyName',$birthday,'$email','$password','$role','$accesToken','$refreshToken','$is_created_backend','$active')";
-
-            if ($stmt2->rowCount() > 0) {
-
-                if ($email_actual == $email) {
-
-                    //preparo l'istruzione
-                    $stmt = $this->conn->prepare($sql);
-
-                    //execute query
-                    $stmt->execute();
-
-                    return $stmt->rowCount();
-                } else {
-
-                    //}
-
-                    return -1;
-                }
-            } else {
-
-                //preparo l'istruzione
-                $stmt = $this->conn->prepare($sql);
-                //execute query
-                $stmt->execute();
-            }
-
-            if ($stmt->rowCount() > 0) {
-
-                $id_user_profile = $this->conn->lastInsertId();
-
-                if ($role_customer > 0) {
-
-                    $hadlingCustomerRoleUser = $this->hadlingCustomerRoleUser($id_user, $id_user_profile, $role_customer, "ROLE-CREATED");
-
-                    if ($hadlingCustomerRoleUser) {
-
-                        $hadlingUser = $this->hadlingUser($id_user, $id_user_profile, "USER-CREATED");
-
-                        if ($hadlingUser) {
-                            if ($role == 2) {
-                                $QualityScoreUserHandling = $this->QualityScoreUserHandling($id_user_profile, 5, "USER-CREATED");
-                                if ($QualityScoreUserHandling) {
-                                    return $id_user_profile;
-                                }
-                            } else {
-                                return $id_user_profile;
-                            }
-                        }
-                    }
-                } else {
-
-                    if ($role == 3) {
-
-                        $input_hadlingCommissions_single_lots = array(
-                            "id_user" => $id_user_profile,
-                            "commissions_now" => $commissions_producer_single_lots,
-                            "causal" => "USER-CREATED",
-                            "id_auction_type" => 1
-                        );
-
-                        $hadlingCommissions_single_lots = $this->hadlingCommissions($input_hadlingCommissions_single_lots);
-
-                        $input_hadlingCommissions_collections = array(
-                            "id_user" => $id_user_profile,
-                            "commissions_now" => $commissions_producer_collections,
-                            "causal" => "USER-CREATED",
-                            "id_auction_type" => 2
-                        );
-
-                        $hadlingCommissions_collections = $this->hadlingCommissions($input_hadlingCommissions_collections);
-
-                        if ($hadlingCommissions_single_lots && $hadlingCommissions_collections) {
-
-                            // CREATE AND ADD TAG FOR AC
-                            //$AC_call = new ACSistem($this->conn);
-
-                            $input_ACCreateTag = ["name" => $firstName . " " . $lastName, "tagType" => "contact"];
-                            //$ACCreateTag = $AC_call->ACCreateTag($input_ACCreateTag);
-                            //$id_ac = $ACCreateTag;
-
-                            // if ($id_ac > 0) {
-
-                            //     $sql_ac = "UPDATE users SET 
-                            //     id_ac = '$id_ac'
-                            //     WHERE id_user = '$id_user_profile'";
-
-                            //     //preparo l'istruzione
-                            //     $stmt_ac = $this->conn->prepare($sql_ac);
-
-                            //     //execute query
-                            //     $stmt_ac->execute();
-
-                            //     $continue = $stmt_ac->rowCount();
-                            // }
-                        }
-                    } else {
-                        $continue = 1;
-                    }
-
-                    if ($continue) {
-
-                        $hadlingUser = $this->hadlingUser($id_user, $id_user_profile, "USER-CREATED");
-
-                        if ($hadlingUser) {
-                            if ($role == 2) {
-                                $QualityScoreUserHandling = $this->QualityScoreUserHandling($id_user_profile, 5, "USER-CREATED");
-
-                                if ($QualityScoreUserHandling) {
-                                    return $id_user_profile;
-                                }
-                            } else {
-                                return $id_user_profile;
-                            }
-                        }
-                    }
-                }
-            }
+        $stmt->execute();
+        if ($stmt->rowCount() > 0) {
+            $stmt->fetch(PDO::FETCH_ASSOC);
+            return 'Create User';
         } else {
-
-            // if ($is_created_backend == 0) {
-
-            //     $stripe_call->DeleteCustomer(["id_customer_stripe" => $id_customer_stripe]);
-            // }
-
-            // return -1;
+            return 'No User Create';
         }
     }
 
