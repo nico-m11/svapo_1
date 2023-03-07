@@ -38,13 +38,13 @@ export function AuthPage() {
               {/* end:: Aside header */}
 
               {/* start:: Aside content */}
-              <div className="flex-column-fluid d-flex flex-column justify-content-center">
+              {/* <div className="flex-column-fluid d-flex flex-column justify-content-center">
                 <img
                   alt="Logo"
                   className="max-h-200px"
-                  //src={toAbsoluteUrl("/media/logos/sito.png")}
+                  src={toAbsoluteUrl("/media/logos/sito.png")}
                 />
-              </div>
+              </div> */}
               {/* end:: Aside content */}
 
               {/* start:: Aside footer for desktop */}
@@ -53,7 +53,7 @@ export function AuthPage() {
                   &copy; Powered By{" "}
                   <img src="/media/logos/peels.png" height="40px" />
                 </div>
-                <div className="opacity-70 font-weight-bold	text-white">
+                {/* <div className="opacity-70 font-weight-bold	text-white">
                   &copy; Marketing By{" "}
                   <Link
                     to={{
@@ -64,8 +64,8 @@ export function AuthPage() {
                   >
                     <img src="/media/logos/mm.png" height="40px" />
                   </Link>
-                </div>
-                <div className="text-dark-50 font-weight-bold order-2 order-sm-1 my-2">
+                </div> */}
+                {/* <div className="text-dark-50 font-weight-bold order-2 order-sm-1 my-2">
                   <Link
                     to={{
                       pathname:
@@ -91,7 +91,7 @@ export function AuthPage() {
                       style={{ color: "#BBAF26" }}
                     ></i>
                   </Link>
-                </div>
+                </div> */}
                 {/* <div className="d-flex">
                   <Link to="/terms" className="text-white">
                     Privacy
@@ -157,7 +157,7 @@ export function AuthPage() {
                 &copy;Powered by{" "}
                 <img src="/media/logos/peels.png" height="40px" />
               </div>
-              <div className="text-dark-50 font-weight-bold order-2 order-sm-1 my-2">
+              {/* <div className="text-dark-50 font-weight-bold order-2 order-sm-1 my-2">
                 &copy;Marketing by{" "}
                 <Link
                     to={{
@@ -168,8 +168,8 @@ export function AuthPage() {
                   >
                     <img src="/media/logos/mm2.png" height="40px" />
                   </Link>
-              </div>
-              <div className="text-dark-50 font-weight-bold order-2 order-sm-1 my-2">
+              </div> */}
+              {/* <div className="text-dark-50 font-weight-bold order-2 order-sm-1 my-2">
                 <Link
                   to={{
                     pathname:
@@ -195,7 +195,7 @@ export function AuthPage() {
                     style={{ color: "#2f2d77" }}
                   ></i>
                 </Link>
-              </div>
+              </div> */}
               <div className="d-flex order-1 order-sm-2 my-2">
                 {/* <Link to="/terms" className="text-dark-75 text-hover-primary">
                   Privacy

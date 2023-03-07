@@ -121,13 +121,13 @@ export function AsideMenuList({ layoutProps }) {
         {/*begin::1 Level*/}
         <li
           className={`menu-item menu-item-submenu ${getMenuItemActive(
-            "/my-page",
+            "/product",
             true 
           )}`}
           aria-haspopup="true"
           data-menu-toggle="hover"
         >
-          <NavLink className="menu-link menu-toggle" to="/my-page">
+          <NavLink className="menu-link menu-toggle" to="/product">
             <span className="svg-icon menu-icon">
               <SVG src={toAbsoluteUrl("/media/svg/icons/General/Star.svg")} />
             </span>
@@ -143,7 +143,7 @@ export function AsideMenuList({ layoutProps }) {
           aria-haspopup="true"
           data-menu-toggle="hover"
         >
-          <NavLink className="menu-link menu-toggle" to="/my-page2">
+          <NavLink className="menu-link menu-toggle" to="/order">
             <span className="svg-icon menu-icon">
               <SVG src={toAbsoluteUrl("/media/svg/icons/General/Star.svg")} />
             </span>
@@ -152,13 +152,13 @@ export function AsideMenuList({ layoutProps }) {
         </li>
         <li
           className={`menu-item menu-item-submenu ${getMenuItemActive(
-            "/my-page3",
+            "/ordertosend",
             false
           )}`}
           aria-haspopup="true"
           data-menu-toggle="hover"
         >
-          <NavLink className="menu-link menu-toggle" to="/my-page3">
+          <NavLink className="menu-link menu-toggle" to="/ordertosend">
             <span className="svg-icon menu-icon">
               <SVG src={toAbsoluteUrl("/media/svg/icons/General/Star.svg")} />
             </span>
@@ -167,13 +167,13 @@ export function AsideMenuList({ layoutProps }) {
         </li>
         <li
           className={`menu-item menu-item-submenu ${getMenuItemActive(
-            "/my-page4",
+            "/adduser",
             false
           )}`}
           aria-haspopup="true"
           data-menu-toggle="hover"
         >
-          <NavLink className="menu-link menu-toggle" to="/my-page4">
+          <NavLink className="menu-link menu-toggle" to="/adduser">
             <span className="svg-icon menu-icon">
               <SVG src={toAbsoluteUrl("/media/svg/icons/General/Star.svg")} />
             </span>
@@ -187,13 +187,13 @@ export function AsideMenuList({ layoutProps }) {
 
         <li
           className={`menu-item menu-item-submenu ${getMenuItemActive(
-            "/my-page5",
+            "/labelinggls",
             false
           )}`}
           aria-haspopup="true"
           data-menu-toggle="hover"
         >
-          <NavLink className="menu-link menu-toggle" to="/my-page5">
+          <NavLink className="menu-link menu-toggle" to="/labelinggls">
             <span className="svg-icon menu-icon">
               <SVG src={toAbsoluteUrl("/media/svg/icons/General/Star.svg")} />
             </span>

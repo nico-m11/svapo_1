@@ -36,11 +36,11 @@ export default function BasePage() {
           <Redirect exact from="/" to="/dashboard" />
         }
         <ContentRoute path="/dashboard" component={DashboardPage} />
-        <ContentRoute path="/my-page" component={MyPage} />
-        <ContentRoute path="/my-page2" component={MyPage2} />
-        <ContentRoute path="/my-page3" component={MyPage3} />
-        <ContentRoute path="/my-page4" component={MyPage4} />
-        <ContentRoute path="/my-page5" component={MyPage5} />
+        <ContentRoute path="/product" component={MyPage} />
+        <ContentRoute path="/order" component={MyPage2} />
+        <ContentRoute path="/ordertosend" component={MyPage3} />
+        <ContentRoute path="/adduser" component={MyPage4} />
+        <ContentRoute path="/labelinggls" component={MyPage5} />
         <ContentRoute path="/faq" component={Faq} />
         <Route path="/user-profile" component={UserProfilepage} />
         <Redirect to="error/error-v1" />
