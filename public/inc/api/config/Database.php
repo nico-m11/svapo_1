@@ -65,7 +65,6 @@ class Database
     //     return $this->conn;
     //}
 
-
     public $localKey = [
         "host" => "localhost",
         "dbName" => "svapo",

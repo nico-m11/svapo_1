@@ -7,6 +7,7 @@ import { useSelector, shallowEqual, useDispatch } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import config from "../../config/config";
+import { setDefaultOptions } from "date-fns";
 
 const initialValues = {
   email: "",
@@ -57,6 +58,7 @@ export function MyPage4(props) {
     initialValues,
     validationSchema: RegistrationSchema,
     onSubmit: (values, { setStatus, setSubmitting}) => {
+      setLoading(true);
       const requestOptions = {
         headers: {
           Authorization:
@@ -79,15 +81,18 @@ export function MyPage4(props) {
         })
         .then(({ data: { authToken } }) => {
           props.register(authToken);
+          setLoading(false);
           setSubmitting(false);
           window.location.href = "/";
         })
         .catch(() => {
+          setLoading(false);
           setSubmitting(false);
         });
     },
   });
-
+// manca solo da fare, la select, per farla crea taballa il quale crei un funzione che poi richiamo in get per poi
+// in front la cicli con il array map e trovi che il select si popola in auto e cosi potremo prendere io valore
   return (
     <>
       <div className="login-form login-signin" style={{ display: "block" }}>

@@ -12,6 +12,45 @@ class Products
     public function __construct($db)
     {
         $this->conn = $db;
+
+    }
+
+    public function GetAllProductsFromDescriptionAndReference()
+    {
+        $sql = "SELECT ps_product_lang.name, ps_product.ean13, ps_product_attribute.reference 
+        FROM ps_product 
+        INNER JOIN ps_product_lang 
+        ON ps_product.id_product = ps_product_lang.id_product 
+        INNER JOIN ps_product_attribute 
+        ON ps_product.id_product = ps_product_attribute.id_product 
+        LIMIT 50;";
+
+
+        $stmt = $this->conn->prepare($sql);
+
+        //execute query
+        $stmt->execute();
+
+        $result = [];
+        if ($stmt->rowCount() > 0) {
+            foreach($stmt->fetchAll(PDO::FETCH_ASSOC) as $product){
+                $product_name = isset($product['name']) ? $product['name'] : 'NO NAME';
+                $product_reference = isset($product['reference']) ? $product['reference'] : 'NO REFERENCE';
+                $product_ean13 = isset($product['ean13']) ? $product['ean13'] : 'NO EAN';
+
+                $result [] = [
+                    'name' => $product_name,
+                    'ean13' => $product_ean13,
+                    'reference' => $product_reference
+                ];
+            };
+        }
+
+        if(count($result) !== 0) {
+            return $result;
+        } else {
+            echo 'NO result';
+        }
     }
 
     public function GetNextSku($output)
@@ -107,7 +146,7 @@ class Products
         $items = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         $result = array();
-        foreach( $items as $key => $item){
+        foreach ($items as $key => $item) {
             $result[] = $item;
             $result[$key]["causal"] = ucfirst(strtolower(str_replace("-", " ", $item["causal"])));
         }
@@ -154,7 +193,6 @@ class Products
             $stmt->execute();
 
             return $stmt->rowCount();
-
         } else {
             return -1;
         }
@@ -243,7 +281,8 @@ class Products
         }
     }
 
-    public function NewStockProduct($output){
+    public function NewStockProduct($output)
+    {
 
         $id_user = $output["id_user"];
         $id_product = $output["id_product"];
