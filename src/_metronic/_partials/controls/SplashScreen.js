@@ -7,9 +7,9 @@ export function SplashScreen() {
     <>
       <div className="splash-screen">
         <img
-          src={toAbsoluteUrl("/media/logos/fantacarnevale23.png")}
+          src={toAbsoluteUrl("/media/logos/svapo.jpg")}
 
-          alt="Logo Fantacarnevale"
+          alt="svapo"
         />
         <CircularProgress className="splash-screen-spinner" />
       </div>

@@ -24,7 +24,7 @@ export function HeaderMenuWrapper() {
         };
     }, [uiService]);
     const getHeaderLogo = () => {
-        let result = "fantacarnevale23.png";
+        let result = "svapo.jpg";
         if (layoutProps.headerSelfTheme && layoutProps.headerSelfTheme !== "dark") {
             result = "logo-dark.png";
         }

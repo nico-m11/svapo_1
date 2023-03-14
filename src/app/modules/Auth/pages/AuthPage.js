@@ -38,13 +38,7 @@ export function AuthPage() {
               {/* end:: Aside header */}
 
               {/* start:: Aside content */}
-              {/* <div className="flex-column-fluid d-flex flex-column justify-content-center">
-                <img
-                  alt="Logo"
-                  className="max-h-200px"
-                  src={toAbsoluteUrl("/media/logos/sito.png")}
-                />
-              </div> */}
+ 
               {/* end:: Aside content */}
 
               {/* start:: Aside footer for desktop */}

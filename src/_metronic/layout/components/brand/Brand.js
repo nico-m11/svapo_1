@@ -31,8 +31,8 @@ export function Brand() {
         <Link to="" className="brand-logo">
           <img alt="logo" 
           // src={layoutProps.headerLogo}
-          src="/media/logos/fantacarnevale23.png"
-          style={{height:"100px"}}
+          src="/media/logos/svapo.jpg"
+          style={{height:"40px"}}
           />
         </Link>
         {/* end::Logo */}
